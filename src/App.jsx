@@ -9,6 +9,7 @@ import ProductDetail from './page/ProductDetail'
 import PrviateRoute from './route/PrivateRoute'
 import Navbar from './component/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch,useSelector } from 'react-redux'
 //1. 전체 상품 페이지, 로그인, 상품상세페이지
 //1-1. 코드가 중복되지 않도록 네비게이션 바 만들기(FontAswome_React활용)
 //2. 전체 상품 페이지에서는 전체 상품을 볼 수 있다.
@@ -22,10 +23,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   
-  const [authenticate, setAuthenticate] = useState(false) //true면 로그인 성공, false면 로그인 실패
+  // const [authenticate, setAuthenticate] = useState(false) //true면 로그인 성공, false면 로그인 실패
   //로그인 성공시 true로 바뀌고, 로그인 실패시 false로 바뀐다.  이때 setAuthenticate는 아래 Login태그에 props로 전달하면 된다
   
-  console.log('authenticate값은?', authenticate)
+  // console.log('authenticate값은?', authenticate)
+
+  // Redux의 authenticate 상태를 가져옴
+  const authenticate = useSelector(state => state.auth.authenticate)
+  const dispatch = useDispatch()
+
+  // setAuthenticate는 dispatch로 대체
+  const setAuthenticate = (value) => {
+
+    console.log('authenticate',authenticate)
+
+    if (value) {
+      // 로그인 액션
+      dispatch({ type: "LOGIN_SUCCESS", payload: {/* id, password 등 */} })
+    } else {
+      // 로그아웃 액션
+      dispatch({ type: "LOGOUT" })
+    }
+  }
 
   return (
     <div>
