@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import ProductCard from '../component/ProductCard'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useSearchParams } from 'react-router-dom'
-import {productAction} from '../redux/actions/productAction'
+// import {productAction} from '../redux/actions/productAction'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import {fetchProducts} from '../redux/reducers/productReducer'
 
 const ProductAll = () => {
 
@@ -20,7 +21,8 @@ const ProductAll = () => {
 
     console.log('searchQuery값은?', searchQuery)
 
-    dispatch(productAction.getProducts(searchQuery))
+    // dispatch(productAction.getProducts(searchQuery))
+    dispatch(fetchProducts(searchQuery))
 
     //let url = `http://localhost:4000/products?q=${searchQuery}`
     // let url = `https://my-json-server.typicode.com/dojunshin/dojun_hnm_project/products?q=${searchQuery}` //JSON 서버를 사용하여 제품 데이터를 가져온다.
